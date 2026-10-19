@@ -1,0 +1,34 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> offgrid-mate@0.2.0 test
+> vitest run
+
+
+ RUN  v3.2.7 /workspace/scratch/3003a07bf54f/offgrid-mate-v2
+
+ ✓ tests/engine.test.ts (14 tests) 32ms
+ ✓ tests/equipment.test.ts (11 tests) 81ms
+ ✓ tests/weather.test.ts (10 tests) 2826ms
+   ✓ weather service and date-safe fallback > aggregates cloud, temperature and precipitation and uses cloud data rather than icons  354ms
+   ✓ weather service and date-safe fallback > preserves manual choices and excludes a different location cache  309ms
+   ✓ weather service and date-safe fallback > uses real cloud multiplier exactly once in solar calculations  348ms
+   ✓ weather service and date-safe fallback > rejects malformed provider data and imported location/cache data  869ms
+ ✓ tests/app.test.tsx (8 tests) 3511ms
+   ✓ working app flows > restores a backup only after confirmation  950ms
+   ✓ working app flows > rejects an invalid backup without changing saved data  305ms
+   ✓ working app flows > shows the Savannah-X profile and persists an appliance change after remount  536ms
+   ✓ working app flows > adds, edits and removes a scheduled appliance  589ms
+   ✓ working app flows > saves charger settings, alternate voltages, theme and duplicated setups  363ms
+   ✓ working app flows > does not overwrite saved configuration when a stale simulation is discarded  445ms
+ ✓ tests/features.test.tsx (7 tests) 6293ms
+   ✓ weather and equipment user flows > saves manual weather immediately, recalculates offline and survives reopening  872ms
+   ✓ weather and equipment user flows > persists Auto mode with no cache and offers Manual fallback offline  901ms
+   ✓ weather and equipment user flows > shows stale cache age and preserves original manual selections  2092ms
+   ✓ weather and equipment user flows > filters brands and products, prefills Engel assumptions and preserves overrides  578ms
+   ✓ weather and equipment user flows > requires manual values for missing specifications and saves reusable custom equipment  606ms
+   ✓ weather and equipment user flows > loads a real-shaped forecast online with manually selected location and caches it  958ms
+
+ Test Files  5 passed (5)
+      Tests  50 passed (50)
+   Start at  15:06:43
+   Duration  10.20s (transform 1.26s, setup 0ms, collect 4.45s, tests 12.74s, environment 5.23s, prepare 848ms)

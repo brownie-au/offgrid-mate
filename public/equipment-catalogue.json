@@ -1,0 +1,151 @@
+{
+  "schema": 1,
+  "updatedAt": "2026-10-19",
+  "products": [
+    {
+      "id": "renogy-rbc40d1s",
+      "brand": "Renogy",
+      "model": "RBC40D1S-AU \u00b7 12V 40A DC-DC Battery Charger with MPPT",
+      "category": "dcdc",
+      "sourceUrl": "https://au.renogy.com/products/renogy-40a-dc-dc-battery-charger-with-mppt",
+      "verifiedAt": "2026-10-19",
+      "notes": "40 A maximum battery output. Solar/DC input selection, approximated here as solar priority. MPPT input limits and charge taper are not validated. Converter efficiency is not deducted again from rated output.",
+      "amps": 40,
+      "voltage": 12,
+      "shared": true,
+      "priority": "solar",
+      "basis": "Maximum charger output current; not a consuming appliance"
+    },
+    {
+      "id": "renogy-rsp200d-g3",
+      "brand": "Renogy",
+      "model": "RSP200D-G3 \u00b7 200W Monocrystalline Solar Panel",
+      "category": "solar",
+      "sourceUrl": "https://www.renogy.com/content/RSP200D/RSP200D-G3%20Datasheet.pdf",
+      "verifiedAt": "2026-10-19",
+      "notes": "200 W STC; Vmp 19.2 V. Solar yield and controller limits are applied by the planner. Not a wiring compatibility check.",
+      "watts": 200,
+      "voltage": 19.2,
+      "basis": "STC panel output; voltage is Vmp, not battery voltage"
+    },
+    {
+      "id": "engel-mtv80",
+      "brand": "Engel",
+      "model": "MT-V80F \u00b7 80 Litre Portable Fridge-Freezer",
+      "category": "fridge",
+      "sourceUrl": "https://engelaustralia.com.au/shop/portable-fridge-freezers/portable-fridge-freezer/mt-v/engel-80-litre-portable-fridge-freezer/",
+      "verifiedAt": "2026-10-19",
+      "notes": "Manufacturer specifies variable 0.5\u20133.6 A and 12/24 V DC, without separate current figures for each voltage. The prefill uses 3.6 A \u00d7 nominal 12 V = 43.2 W as a conservative planning conversion. Confirm voltage and measured draw. 45% duty is an estimate; daily Wh and startup power are unverified.",
+      "amps": 3.6,
+      "voltage": 12,
+      "basis": "Variable current 0.5\u20133.6 A; converted upper bound, not verified average watts"
+    },
+    {
+      "id": "redarc-bcdc1225d",
+      "brand": "REDARC",
+      "model": "BCDC1225D / Classic25 \u00b7 12V 25A Dual Input Charger",
+      "category": "dcdc",
+      "sourceUrl": "https://www.redarcelectronics.com/au/dual-input-25a-under-bonnet-dc-battery-charger",
+      "verifiedAt": "2026-10-19",
+      "notes": "25 A total rated battery charging output. Generic combined-current limit approximates the controller; actual source allocation is not modelled.",
+      "amps": 25,
+      "voltage": 12,
+      "shared": true,
+      "priority": "combined",
+      "basis": "Rated battery output current"
+    },
+    {
+      "id": "victron-orion-12-12-30",
+      "brand": "Victron Energy",
+      "model": "Orion-Tr Smart 12/12-30 \u00b7 Non-isolated DC-DC Charger",
+      "category": "dcdc",
+      "sourceUrl": "https://www.victronenergy.com.au/dc-dc-converters/orion-tr-smart-non-isolated",
+      "verifiedAt": "2026-10-19",
+      "notes": "12 V output system, 30 A rated charger output. Existing independent MPPT solar settings are preserved. Rated output does not need another converter-efficiency deduction.",
+      "amps": 30,
+      "voltage": 12,
+      "shared": false,
+      "basis": "Rated battery output current"
+    },
+    {
+      "id": "victron-ip22-12-15",
+      "brand": "Victron Energy",
+      "model": "Blue Smart IP22 12/15 (1) \u00b7 230V Mains Charger",
+      "category": "mains",
+      "sourceUrl": "https://www.victronenergy.com/media/pg/Blue_Smart_IP22_Charger_230V_manual/en/index-en.html",
+      "verifiedAt": "2026-10-19",
+      "notes": "15 A battery-side output; mains or generator supplies the charger. Runtime remains user-entered.",
+      "amps": 15,
+      "voltage": 12,
+      "basis": "Rated 12 V / 15 A battery charger output"
+    },
+    {
+      "id": "victron-inverter-12-500-hw15",
+      "brand": "Victron Energy",
+      "model": "Inverter VE.Direct 12/500 \u00b7 230V HW15",
+      "category": "inverter",
+      "sourceUrl": "https://www.victronenergy.com/media/pg/Inverter_VE.Direct_230V_-_HW15/en/technical-specifications.html",
+      "verifiedAt": "2026-10-19",
+      "notes": "HW15 manual: 450 W continuous at 25\u00b0C; 380 W at 40\u00b0C; peak 750 W for 3 seconds. 86% is maximum efficiency, not a guaranteed load efficiency. Inverter output capacity is not continuous battery consumption. Idle is applied once while an AC appliance is scheduled.",
+      "voltage": 12,
+      "idleW": 7,
+      "efficiency": 0.86,
+      "continuousW": 450,
+      "peakW": 750,
+      "basis": "7 W zero-load; 86% maximum efficiency"
+    },
+    {
+      "id": "ecoflow-110-lightweight",
+      "brand": "EcoFlow",
+      "model": "110W Lightweight Portable Solar Panel",
+      "category": "solar",
+      "sourceUrl": "https://manuals.ecoflow.com/us/product/110w-lightweight-portable-solar-panel?lang=en_US",
+      "verifiedAt": "2026-10-19",
+      "notes": "110 W under STC. Bifacial/nameplate alternatives are not added. Solar yield is applied separately.",
+      "watts": 110,
+      "basis": "110 W rated output under STC"
+    },
+    {
+      "id": "bluetti-pv120",
+      "brand": "BLUETTI",
+      "model": "PV120 \u00b7 120W Solar Panel (legacy)",
+      "category": "solar",
+      "sourceUrl": "https://www.bluettipower.com.au/products/bluetti-pv120-solar-panel",
+      "verifiedAt": "2026-10-19",
+      "notes": "Legacy phased-out product retained for existing owners. STC rating is not daily harvest.",
+      "watts": 120,
+      "basis": "120 W rated panel output"
+    },
+    {
+      "id": "starlink-mini",
+      "brand": "Starlink",
+      "model": "Mini",
+      "category": "communications",
+      "sourceUrl": "https://starlink.com/public-files/specification_sheet_mini_ro-RO.pdf",
+      "verifiedAt": "2026-10-19",
+      "notes": "Average consumption range 25\u201340 W. The prefill uses the upper end of that average range, not a startup rating. Enter actual hours and account for any external power conversion separately.",
+      "watts": 40,
+      "basis": "Manufacturer average-use range: 25\u201340 W; upper end prefilled"
+    },
+    {
+      "id": "goalzero-lighthouse600",
+      "brand": "Goal Zero",
+      "model": "Lighthouse 600 Lantern & USB Power Hub",
+      "category": "lighting",
+      "sourceUrl": "https://goalzero.com/collections/solar-rechargable-lanterns/products/lighthouse-600-lantern-usb-power-hub",
+      "verifiedAt": "2026-10-19",
+      "notes": "Manufacturer lists 2 \u00d7 3 W LEDs. This is not verified USB charging input or vehicle-battery consumption. Enter measured charging watts and hours; no consumption value is invented.",
+      "basis": "2 \u00d7 3 W LED output only; external charging draw unverified"
+    },
+    {
+      "id": "dometic-cfx3-45",
+      "brand": "Dometic",
+      "model": "CFX3 45 \u00b7 Portable Fridge-Freezer",
+      "category": "fridge",
+      "sourceUrl": "https://www.dometic.com/externalassets/dometic-cfx3-45_9600028617_76686.pdf",
+      "verifiedAt": "2026-10-19",
+      "notes": "Manufacturer documentation includes an annual energy label; it is not used as a camping daily estimate without matched test conditions. Enter measured watts/duty cycle or measured daily Wh. Startup power is unverified.",
+      "basis": "Model verified; usable camping draw requires manual input"
+    }
+  ]
+}
