@@ -36,13 +36,85 @@ const source = (slot: SourceEquipment["slot"]): SourceEquipment => ({
 });
 beforeEach(() => localStorage.clear());
 describe("equipment model and migration", () => {
-  it("validates actual starter coverage and rejects fake specifications", () => {
+  it("validates broad manufacturer coverage and rejects fake specifications", () => {
     const p = parseCatalogue(catalogue);
-    expect(p).toHaveLength(12);
-    expect(new Set(p.map((x) => x.brand)).size).toBe(9);
+    expect(p.length).toBeGreaterThanOrEqual(300);
+    expect(new Set(p.map((x) => x.brand)).size).toBeGreaterThanOrEqual(20);
+    expect(new Set(p.map((x) => x.id)).size).toBe(p.length);
+    expect(new Set(p.map((x) => `${x.brand}:${x.model}`)).size).toBe(p.length);
+    for (const item of p) {
+      expect(item.notes.length).toBeGreaterThan(20);
+      if (item.category === "solar") expect(item.watts).toBeGreaterThan(0);
+      if (["dcdc", "mains"].includes(item.category)) {
+        expect(item.amps).toBeGreaterThan(0);
+        expect([12, 24, 48]).toContain(item.voltage);
+        expect(item.watts).toBeUndefined();
+      }
+      if (item.category === "inverter") {
+        expect(item.idleW).toBeGreaterThanOrEqual(0);
+        expect(item.efficiency).toBeGreaterThan(0);
+        expect(item.watts).toBeUndefined();
+      }
+    }
     expect(() =>
       parseCatalogue({ schema: 1, products: [{ ...p[0], amps: "40" }] }),
     ).toThrow();
+  });
+  it("keeps original product identifiers and distinguishes 12V and 24V Renogy output", () => {
+    const p = parseCatalogue(catalogue);
+    for (const id of [
+      "renogy-rbc40d1s",
+      "renogy-rsp200d-g3",
+      "engel-mtv80",
+      "redarc-bcdc1225d",
+      "victron-orion-12-12-30",
+      "victron-ip22-12-15",
+      "victron-inverter-12-500-hw15",
+      "ecoflow-110-lightweight",
+      "bluetti-pv120",
+      "starlink-mini",
+      "goalzero-lighthouse600",
+      "dometic-cfx3-45",
+    ]) {
+      expect(p.some((item) => item.id === id)).toBe(true);
+    }
+    const renogy = p.filter((item) => item.model.startsWith("RBC2125DS"));
+    expect(renogy.map(({ amps, voltage }) => ({ amps, voltage }))).toEqual([
+      { amps: 50, voltage: 12 },
+      { amps: 25, voltage: 24 },
+    ]);
+  });
+  it("replaces an old 12-item cache with the expanded offline bundle", () => {
+    localStorage.setItem(
+      "offgrid-mate:catalogue:v1",
+      JSON.stringify({
+        schema: 1,
+        products: catalogue.products.slice(0, 12),
+        checkedAt: new Date().toISOString(),
+      }),
+    );
+    expect(readCatalogue().products).toEqual(parseCatalogue(catalogue));
+    expect(readCatalogue().updatedAt).toBeUndefined();
+  });
+  it("keeps newer cached revisions offline and refuses catalogue downgrades", async () => {
+    const next = {
+      ...catalogue,
+      revision: catalogue.revision + 1,
+      products: [
+        ...catalogue.products,
+        { ...catalogue.products[0], id: "future-product" },
+      ],
+    };
+    await refreshCatalogue(
+      vi.fn().mockResolvedValue({ status: 200, data: next }),
+    );
+    expect(readCatalogue().products.at(-1)?.id).toBe("future-product");
+    await expect(
+      refreshCatalogue(
+        vi.fn().mockResolvedValue({ status: 200, data: catalogue }),
+      ),
+    ).rejects.toThrow("older catalogue");
+    expect(readCatalogue().products.at(-1)?.id).toBe("future-product");
   });
   it("keeps v1 backups and existing appliances unchanged", () => {
     const s = initialStore();

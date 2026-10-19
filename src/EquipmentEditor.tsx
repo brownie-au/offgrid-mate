@@ -80,6 +80,7 @@ export function EquipmentEditor({
   );
   const [brandSearch, setBrandSearch] = useState("");
   const [productSearch, setProductSearch] = useState("");
+  const [categoryFilter, setCategoryFilter] = useState<Category | "all">("all");
   const [productId, setProductId] = useState(initial.productId || "");
   const [meta, setMeta] = useState<EquipmentMeta>({
     brand: initial.brand,
@@ -126,11 +127,19 @@ export function EquipmentEditor({
     };
   }, []);
   const brands = [...new Set(data.products.map((p) => p.brand))].sort();
-  const products = data.products.filter(
-    (p) =>
-      p.brand === brand &&
-      p.model.toLowerCase().includes(productSearch.toLowerCase()),
-  );
+  const products = data.products
+    .filter(
+      (p) =>
+        p.brand === brand &&
+        (((categoryFilter === "all" || p.category === categoryFilter) &&
+          `${p.model} ${categories[p.category]}`
+            .toLowerCase()
+            .includes(productSearch.trim().toLowerCase())) ||
+          p.id === productId),
+    )
+    .sort((a, b) =>
+      a.model.localeCompare(b.model, undefined, { numeric: true }),
+    );
   const patch = (v: Partial<CustomTemplate>) => {
     setEntry((e) => ({ ...e, ...v }));
     setMeta((m) => ({ ...m, overridden: !!m.productId }));
@@ -156,7 +165,7 @@ export function EquipmentEditor({
       idleW: product.idleW ?? e.idleW,
       efficiency: product.efficiency ?? e.efficiency,
       quantity: 1,
-      ac: false,
+      ac: !!product.ac,
       hours: source ? 0 : product.category === "fridge" ? 24 : 6,
       start: source ? 9 : product.category === "fridge" ? 0 : 9,
       duty: product.category === "fridge" ? 0.45 : 1,
@@ -308,6 +317,8 @@ export function EquipmentEditor({
             value={brand}
             onChange={(e) => {
               setBrand(e.target.value);
+              setProductSearch("");
+              setCategoryFilter("all");
               setProductId("");
               setMeta({});
               setNeedsPower(false);
@@ -332,6 +343,27 @@ export function EquipmentEditor({
         </div>
         <div className="field">
           <label htmlFor="equipment-product">Product / Model</label>
+          <select
+            aria-label="Filter product category"
+            value={categoryFilter}
+            disabled={brand === "custom"}
+            onChange={(e) =>
+              setCategoryFilter(e.target.value as Category | "all")
+            }
+          >
+            <option value="all">All equipment types</option>
+            {Object.entries(categories)
+              .filter(([key]) =>
+                data.products.some(
+                  (p) => p.brand === brand && p.category === key,
+                ),
+              )
+              .map(([key, label]) => (
+                <option key={key} value={key}>
+                  {label}
+                </option>
+              ))}
+          </select>
           <input
             type="search"
             aria-label="Search products"
@@ -360,9 +392,21 @@ export function EquipmentEditor({
             {products.map((p) => (
               <option key={p.id} value={p.id}>
                 {p.model}
+                {!isSource(p.category) &&
+                p.watts === undefined &&
+                p.amps === undefined &&
+                p.dailyWh === undefined
+                  ? " · Enter power"
+                  : ""}
               </option>
             ))}
           </select>
+          {brand !== "custom" && (
+            <small role="status">
+              {products.length} matching models · “Enter power” needs your
+              measurement.
+            </small>
+          )}
         </div>
       </div>
       {brand === "custom" && templates.length > 0 && (

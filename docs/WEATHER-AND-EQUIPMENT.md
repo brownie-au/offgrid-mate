@@ -40,9 +40,7 @@ Auto uses cloud observations from forecast intervals, not icon categories, to es
 
 ## Catalogue coverage and refresh
 
-The starter catalogue has **12 products across 9 brands**: Renogy, Engel, REDARC, Victron Energy, EcoFlow, BLUETTI, Starlink, Goal Zero and Dometic. It covers solar, DC-DC/MPPT, mains chargers, inverters, fridges, communications and lighting. It is not an exhaustive brand/product database.
-
-Ten entries have usable electrical planning prefills. Goal Zero Lighthouse 600 and Dometic CFX3 45 require manual consumption input: LED output or an unmatched annual energy label is not sufficient evidence of actual camping battery demand.
+The expanded catalogue has **334 entries across 21 brands**, with 266 electrical planning prefills and 68 model-only entries requiring consumption input. [Full coverage, primary sources and limitations](CATALOGUE.md). Brand/model search now includes an equipment-type filter. This remains a curated catalogue, not every manufacturer product.
 
 Engel MT-V80F uses a clearly labelled conversion of the stated 3.6 A upper range at an assumed nominal 12 V, producing 43.2 W. The source does not separate 12/24 V current values. It is not verified average draw or startup power; confirm the voltage, use measured draw and adjust the explicitly estimated duty cycle.
 
@@ -54,7 +52,7 @@ Before commercial release, move `CATALOGUE_URL` to a stable release/main feed an
 
 ## Verification and remaining limits
 
-50 automated tests pass: original energy/persistence checks, weather parsing/date alignment/cache/error cases, injected granted/denied/unavailable GPS outcomes, and DOM flows for manual persistence, Auto caching, stale labels, selection/autofill, custom reuse/deletion and source accounting. A live Cairns HTTP forecast request returned 200 and its response was parsed and schema-validated (see `live-weather-smoke.json`).
+The original 50 automated checks cover: original energy/persistence checks, weather parsing/date alignment/cache/error cases, injected granted/denied/unavailable GPS outcomes, and DOM flows for manual persistence, Auto caching, stale labels, selection/autofill, custom reuse/deletion and source accounting. A live Cairns HTTP forecast request returned 200 and its response was parsed and schema-validated (see `live-weather-smoke.json`).
 
 Native compilation, APK signature/archive checks and matching bundled web assets pass. The package is a debug test build. No Android device/emulator or browser visual automation was available: native permission dialogs, WebView networking, Android share/picker behaviour and final mobile appearance need real-device testing. DOM tests are not physical-device tests.
 

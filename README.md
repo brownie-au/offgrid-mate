@@ -6,9 +6,9 @@ An offline camping energy planner built with React, TypeScript and Capacitor 8. 
 
 ## New in Prototype 2
 
-Forecast now has persistent Auto/Manual weather, native location permission, offline coordinate entry/presets, date-aware cached forecasts and a cloud-based solar estimate. Appliance Details includes a searchable 12-product / 9-brand manufacturer catalogue, source evidence, override preservation, reusable custom items and charging-source handling.
+Forecast now has persistent Auto/Manual weather, native location permission, offline coordinate entry/presets, date-aware cached forecasts and a cloud-based solar estimate. Appliance Details includes a searchable 334-entry / 21-brand manufacturer catalogue, source evidence, override preservation, reusable custom items and charging-source handling.
 
-Read [the weather and equipment guide](docs/WEATHER-AND-EQUIPMENT.md) for controls, provider terms, data coverage and actual verification limits. No weather API key or paid service is required for this prototype.
+Read [the catalogue coverage and research notes](docs/CATALOGUE.md) and [the weather and equipment guide](docs/WEATHER-AND-EQUIPMENT.md) for controls, provider terms, data coverage and actual verification limits. No weather API key or paid service is required for this prototype.
 
 ## Run and build
 

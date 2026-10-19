@@ -28,6 +28,7 @@ export type Product = {
   shared?: boolean;
   priority?: "solar" | "combined";
   basis?: string;
+  ac?: boolean;
 };
 export type EquipmentMeta = {
   brand?: string;
@@ -198,6 +199,8 @@ export function validProduct(v: Product) {
     ) &&
     (v.efficiency === undefined || n(v.efficiency, 0.1, 1)) &&
     (v.shared === undefined || typeof v.shared === "boolean") &&
+    (v.ac === undefined || typeof v.ac === "boolean") &&
+    (v.basis === undefined || string(v.basis, 200)) &&
     (v.priority === undefined || ["solar", "combined"].includes(v.priority))
   );
 }

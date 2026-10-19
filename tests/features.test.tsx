@@ -36,6 +36,115 @@ const add = () => {
   fireEvent.click(screen.getByRole("button", { name: "Add appliance" }));
 };
 describe("weather and equipment user flows", () => {
+  it("browses the expanded catalogue offline by category and clears old searches on brand change", () => {
+    render(<App />);
+    add();
+    fireEvent.change(screen.getByLabelText("Brand"), {
+      target: { value: "Renogy" },
+    });
+    fireEvent.change(screen.getByLabelText("Filter product category"), {
+      target: { value: "solar" },
+    });
+    const models = screen.getByLabelText(
+      "Product / Model",
+    ) as HTMLSelectElement;
+    expect([...models.options].slice(1).length).toBeGreaterThan(10);
+    expect(
+      [...models.options]
+        .slice(1)
+        .every(
+          (o) =>
+            catalogue.products.find((p) => p.id === o.value)?.category ===
+            "solar",
+        ),
+    ).toBe(true);
+    fireEvent.change(screen.getByLabelText("Search products"), {
+      target: { value: "ShadowFlux" },
+    });
+    expect(
+      [...models.options].slice(1).every((o) => o.text.includes("ShadowFlux")),
+    ).toBe(true);
+    fireEvent.change(screen.getByLabelText("Brand"), {
+      target: { value: "Brass Monkey" },
+    });
+    expect(
+      (screen.getByLabelText("Search products") as HTMLInputElement).value,
+    ).toBe("");
+    expect(
+      (screen.getByLabelText("Filter product category") as HTMLSelectElement)
+        .value,
+    ).toBe("all");
+    const model = catalogue.products.find(
+      (p) => p.brand === "Brass Monkey" && p.model.startsWith("GH1640"),
+    )!;
+    fireEvent.change(models, { target: { value: model.id } });
+    expect(
+      (screen.getByLabelText("Running power") as HTMLInputElement).value,
+    ).toBe("60");
+    fireEvent.click(screen.getByRole("button", { name: "Save appliance" }));
+    expect(saved().profiles[0].appliances.at(-1)).toMatchObject({
+      watts: 60,
+      duty: 0.45,
+      hours: 24,
+      productId: model.id,
+    });
+  });
+  it("uses AC inverter accounting for a stock Starlink kit and keeps it after reopening", () => {
+    render(<App />);
+    add();
+    fireEvent.change(screen.getByLabelText("Brand"), {
+      target: { value: "Starlink" },
+    });
+    const product = catalogue.products.find((p) =>
+      p.model.startsWith("Standard (Gen 3"),
+    )!;
+    fireEvent.change(screen.getByLabelText("Product / Model"), {
+      target: { value: product.id },
+    });
+    expect(
+      (screen.getByLabelText("Runs through an AC inverter") as HTMLInputElement)
+        .checked,
+    ).toBe(true);
+    expect(
+      (screen.getByLabelText("Running power") as HTMLInputElement).value,
+    ).toBe("100");
+    fireEvent.click(screen.getByRole("button", { name: "Save appliance" }));
+    expect(saved().profiles[0].appliances.at(-1)).toMatchObject({
+      ac: true,
+      watts: 100,
+      duty: 1,
+    });
+    fireEvent.click(
+      screen.getByRole("button", { name: /Starlink Standard \(Gen 3/ }),
+    );
+    expect(
+      (screen.getByLabelText("Runs through an AC inverter") as HTMLInputElement)
+        .checked,
+    ).toBe(true);
+  });
+  it("lists GME radio models without confusing RF watts or fuse current with demand", () => {
+    render(<App />);
+    add();
+    fireEvent.change(screen.getByLabelText("Brand"), {
+      target: { value: "GME" },
+    });
+    const product = catalogue.products.find((p) =>
+      p.model.startsWith("XRS-335C"),
+    )!;
+    expect(
+      screen.getByRole("option", { name: /XRS-335C.*Enter power/ }),
+    ).toBeTruthy();
+    fireEvent.change(screen.getByLabelText("Product / Model"), {
+      target: { value: product.id },
+    });
+    expect(
+      (screen.getByLabelText("Running power") as HTMLInputElement).value,
+    ).toBe("0");
+    fireEvent.click(screen.getByRole("button", { name: "Save appliance" }));
+    expect(
+      screen.getByText(/Enter measured power or daily energy/),
+    ).toBeTruthy();
+  });
   it("saves manual weather immediately, recalculates offline and survives reopening", () => {
     const v = render(<App />);
     nav("Forecast");
