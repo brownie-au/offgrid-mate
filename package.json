@@ -1,0 +1,40 @@
+{
+  "name": "offgrid-mate",
+  "version": "0.2.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0",
+    "build": "tsc --noEmit && vite build",
+    "test": "vitest run",
+    "android:sync": "npm run build && cap sync android",
+    "android:debug": "npm run android:sync && cd android && ./gradlew :app:assembleDebug --max-workers=2",
+    "android:bundle": "npm run android:sync && cd android && ./gradlew :app:bundleRelease --max-workers=2"
+  },
+  "dependencies": {
+    "@capacitor/android": "^8.0.0",
+    "@capacitor/core": "^8.0.0",
+    "@capacitor/filesystem": "^8.0.0",
+    "@capacitor/geolocation": "^8.2.4",
+    "@capacitor/share": "^8.0.0",
+    "lucide-react": "^0.468.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "tz-lookup": "^6.1.25"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^8.0.0",
+    "@testing-library/react": "^16.3.3",
+    "@testing-library/user-event": "^14.6.8",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@types/tz-lookup": "^6.1.2",
+    "@vitejs/plugin-react": "^4.3.4",
+    "jsdom": "^30.1.3",
+    "prettier": "^3.9.10",
+    "typescript": "^5.7.3",
+    "vite": "^6.1.0",
+    "vite-plugin-singlefile": "^2.3.0",
+    "vitest": "^3.0.0"
+  }
+}

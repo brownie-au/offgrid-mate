@@ -1,0 +1,81 @@
+{
+  "provider": "MET Norway Locationforecast 2.0",
+  "source": "https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=-16.9186&lon=145.7781",
+  "attribution": "MET Norway, CC BY 4.0. Aggregated into planning estimates by OffGrid Mate.",
+  "httpStatus": 200,
+  "liveRequestVerified": true,
+  "modelUpdatedAt": "2026-10-19T05:31:47Z",
+  "validatedCache": true,
+  "firstSevenDays": [
+    {
+      "date": "2026-10-19",
+      "cloud": 32.093551572001005,
+      "minC": 22.3,
+      "maxC": 26.2,
+      "rainMm": 0.2,
+      "hours": 9,
+      "factor": 0.9752078264274875,
+      "condition": "mixed"
+    },
+    {
+      "date": "2026-10-20",
+      "cloud": 41.45902830871009,
+      "minC": 20.9,
+      "maxC": 27.2,
+      "rainMm": 3.6999999999999997,
+      "hours": 24,
+      "factor": 0.9465535799193657,
+      "condition": "rain"
+    },
+    {
+      "date": "2026-10-21",
+      "cloud": 54.71111930599328,
+      "minC": 22.2,
+      "maxC": 27.9,
+      "rainMm": 3.3,
+      "hours": 24,
+      "factor": 0.8771746351124969,
+      "condition": "rain"
+    },
+    {
+      "date": "2026-10-22",
+      "cloud": 68.67563509461097,
+      "minC": 21.8,
+      "maxC": 28.1,
+      "rainMm": 0.2333333333333333,
+      "hours": 24,
+      "factor": 0.7570766192983236,
+      "condition": "mixed"
+    },
+    {
+      "date": "2026-10-23",
+      "cloud": 41.19795659435663,
+      "minC": 21.4,
+      "maxC": 28.5,
+      "rainMm": 0.4666666666666666,
+      "hours": 24,
+      "factor": 0.9475569078695063,
+      "condition": "mixed"
+    },
+    {
+      "date": "2026-10-24",
+      "cloud": 42.281088913245526,
+      "minC": 22.1,
+      "maxC": 27.5,
+      "rainMm": 1.8333333333333328,
+      "hours": 24,
+      "factor": 0.9433108749091557,
+      "condition": "mixed"
+    },
+    {
+      "date": "2026-10-25",
+      "cloud": 73.0648655791523,
+      "minC": 23.1,
+      "maxC": 28.8,
+      "rainMm": 2.0999999999999996,
+      "hours": 24,
+      "factor": 0.7074588041958789,
+      "condition": "rain"
+    }
+  ]
+}
