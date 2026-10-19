@@ -3356,10 +3356,10 @@
       "category": "communications",
       "sourceUrl": "https://starlink.com/us/support/article/18836c7e-2d97-6153-fe67-c18427bd0558",
       "verifiedAt": "2026-10-19",
-      "watts": 150,
       "ac": true,
-      "notes": "Prefill uses the upper end of the manufacturer average range (110–150W) for the stock AC-powered kit. Not startup/snow-melt maximum. External inverter conversion is applied once by the planner. DC modifications require measured input and an override. Enable “Runs through an AC inverter” for the stock AC supply. Updated builds select it automatically; check this checkbox yourself in older prototypes.",
-      "basis": "Average-use range 110–150W; upper bound, stock AC supply"
+      "notes": "Prefill uses the upper end of the manufacturer average range (110–150W) for the stock AC-powered kit. Not startup/snow-melt maximum. External inverter conversion is applied once by the planner. DC modifications require measured input and an override. Enable “Runs through an AC inverter” for the stock AC supply. Updated builds prefill power and select AC automatically. Older prototypes require manual power entry and the AC checkbox.",
+      "basis": "Average-use range 110–150W; upper bound, stock AC supply",
+      "acWatts": 150
     },
     {
       "id": "starlink-standard-gen-3-standard-4-stock-ac-kit",
@@ -3368,10 +3368,10 @@
       "category": "communications",
       "sourceUrl": "https://www.starlink.com/public-files/specification_sheet_standard.pdf",
       "verifiedAt": "2026-10-19",
-      "watts": 100,
       "ac": true,
-      "notes": "Prefill uses the upper end of the manufacturer average range (75–100W) for the stock AC-powered kit. Not startup/snow-melt maximum. External inverter conversion is applied once by the planner. DC modifications require measured input and an override. Enable “Runs through an AC inverter” for the stock AC supply. Updated builds select it automatically; check this checkbox yourself in older prototypes.",
-      "basis": "Average-use range 75–100W; upper bound, stock AC supply"
+      "notes": "Prefill uses the upper end of the manufacturer average range (75–100W) for the stock AC-powered kit. Not startup/snow-melt maximum. External inverter conversion is applied once by the planner. DC modifications require measured input and an override. Enable “Runs through an AC inverter” for the stock AC supply. Updated builds prefill power and select AC automatically. Older prototypes require manual power entry and the AC checkbox.",
+      "basis": "Average-use range 75–100W; upper bound, stock AC supply",
+      "acWatts": 100
     },
     {
       "id": "starlink-standard-actuated-stock-ac-kit",
@@ -3380,10 +3380,10 @@
       "category": "communications",
       "sourceUrl": "https://starlink.com/us/support/article/18836c7e-2d97-6153-fe67-c18427bd0558",
       "verifiedAt": "2026-10-19",
-      "watts": 75,
       "ac": true,
-      "notes": "Prefill uses the upper end of the manufacturer average range (50–75W) for the stock AC-powered kit. Not startup/snow-melt maximum. External inverter conversion is applied once by the planner. DC modifications require measured input and an override. Enable “Runs through an AC inverter” for the stock AC supply. Updated builds select it automatically; check this checkbox yourself in older prototypes.",
-      "basis": "Average-use range 50–75W; upper bound, stock AC supply"
+      "notes": "Prefill uses the upper end of the manufacturer average range (50–75W) for the stock AC-powered kit. Not startup/snow-melt maximum. External inverter conversion is applied once by the planner. DC modifications require measured input and an override. Enable “Runs through an AC inverter” for the stock AC supply. Updated builds prefill power and select AC automatically. Older prototypes require manual power entry and the AC checkbox.",
+      "basis": "Average-use range 50–75W; upper bound, stock AC supply",
+      "acWatts": 75
     },
     {
       "id": "victron-ip22-12-15",
@@ -3901,5 +3901,5 @@
       "basis": "Rated nominal battery output current"
     }
   ],
-  "revision": 2
+  "revision": 3
 }

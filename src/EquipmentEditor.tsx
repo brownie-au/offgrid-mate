@@ -154,6 +154,7 @@ export function EquipmentEditor({
       model: product.model.slice(0, 80),
       category: product.category,
       watts:
+        product.acWatts ??
         product.watts ??
         (product.category === "inverter"
           ? product.continuousW || 0
@@ -194,6 +195,7 @@ export function EquipmentEditor({
     setNeedsPower(
       !source &&
         product.watts === undefined &&
+        product.acWatts === undefined &&
         product.dailyWh === undefined &&
         product.amps === undefined,
     );
@@ -394,6 +396,7 @@ export function EquipmentEditor({
                 {p.model}
                 {!isSource(p.category) &&
                 p.watts === undefined &&
+                p.acWatts === undefined &&
                 p.amps === undefined &&
                 p.dailyWh === undefined
                   ? " · Enter power"

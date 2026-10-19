@@ -84,6 +84,20 @@ describe("equipment model and migration", () => {
       { amps: 25, voltage: 24 },
     ]);
   });
+  it("requires manual consumption in legacy DC-only clients for new stock AC kits", () => {
+    const kits = parseCatalogue(catalogue).filter((p) => p.ac);
+    expect(kits).toHaveLength(3);
+    for (const kit of kits) {
+      expect(kit.acWatts).toBeGreaterThan(0);
+      // These are the only consumption fields understood by the old editor.
+      expect(kit.watts).toBeUndefined();
+      expect(kit.amps).toBeUndefined();
+      expect(kit.dailyWh).toBeUndefined();
+      expect(() =>
+        parseCatalogue({ schema: 1, products: [{ ...kit, ac: false }] }),
+      ).toThrow();
+    }
+  });
   it("replaces an old 12-item cache with the expanded offline bundle", () => {
     localStorage.setItem(
       "offgrid-mate:catalogue:v1",

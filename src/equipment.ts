@@ -18,6 +18,9 @@ export type Product = {
   verifiedAt: string;
   notes: string;
   watts?: number;
+  // Kept separate so older clients, which cannot autofill AC operation, ask
+  // for manual input instead of silently modelling a stock AC kit as DC.
+  acWatts?: number;
   amps?: number;
   voltage?: number;
   dailyWh?: number;
@@ -182,6 +185,7 @@ export function validProduct(v: Product) {
     string(v.notes, 2000) &&
     [
       "watts",
+      "acWatts",
       "amps",
       "voltage",
       "dailyWh",
@@ -200,6 +204,7 @@ export function validProduct(v: Product) {
     (v.efficiency === undefined || n(v.efficiency, 0.1, 1)) &&
     (v.shared === undefined || typeof v.shared === "boolean") &&
     (v.ac === undefined || typeof v.ac === "boolean") &&
+    (v.acWatts === undefined || (v.ac === true && !isSource(v.category))) &&
     (v.basis === undefined || string(v.basis, 200)) &&
     (v.priority === undefined || ["solar", "combined"].includes(v.priority))
   );

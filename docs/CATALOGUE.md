@@ -1,6 +1,6 @@
 # Equipment catalogue — research and maintenance
 
-Revision 2, checked 19 October 2026. **334 entries across 21 brands**, expanded from 12 entries / 9 brands. These are distinct model or electrical-output choices, not a claim to cover every product ever made. Some entries are retained for existing owners and may be phased out or unavailable locally.
+Revision 3, checked 19 October 2026. **334 entries across 21 brands**, expanded from 12 entries / 9 brands. These are distinct model or electrical-output choices, not a claim to cover every product ever made. Some entries are retained for existing owners and may be phased out or unavailable locally.
 
 **266 entries have an electrical planning prefill; 68 are model-only entries requiring manual consumption.** All have a manufacturer source URL, a checked date and caveats. “Verified” means the source supports the fields actually supplied, not that a product has a laboratory-verified daily consumption figure.
 
@@ -65,7 +65,7 @@ Representative primary sources:
 - Engel variable-current ranges without separate 12/24V figures retain the existing explicitly labelled nominal-12V upper-bound assumption. Bushman and myCOOLMAN consumption figures with ambiguous Ah/time notation are not converted into daily Wh. Some Dometic and EvaKool entries are model-only because a matched consumption specification was not established.
 - Brass Monkey GH1660/GH1662 stationary-only uprights were excluded; the manufacturer says they are unsuitable for a moving camper. Current-table identities include legacy models, so the checked date does not guarantee current stock.
 - GME 5W RF output and 2A fuse ratings are not input consumption. GME models require manual battery demand. Internal-battery lanterns require measured external charging demand unless a usable input specification is supplied.
-- Starlink stock AC kits select AC operation, using the upper manufacturer average-use bound rather than a peak. External inverter loss is added once. Earlier prototype clients ignore the new `ac` field: on those clients, manually tick “Runs through an AC inverter” as stated in the product notes, or install the updated build. Existing saved items are never rewritten by a catalogue update.
+- Starlink stock AC kits select AC operation, using the upper manufacturer average-use bound rather than a peak. External inverter loss is added once. Stock-kit AC input uses a separate `acWatts` field with the `ac` flag. Updated builds prefill both power and AC operation. Earlier prototypes do not understand these fields, so they require manual consumption input; manually enable “Runs through an AC inverter” there as stated in the notes. They never receive an AC kit rating through the legacy DC `watts` field. Existing saved items are never rewritten by a catalogue update.
 - Standalone solar controllers, battery models, integrated power stations and multi-function mains/inverter combinations are omitted where the current editor cannot represent their roles faithfully. Use existing system settings or Custom as appropriate. Manufacturer ranges remain incomplete; this is an expandable maintained catalogue.
 
 ## Finding and updating equipment
