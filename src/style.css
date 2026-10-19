@@ -425,10 +425,11 @@ select {
   color: inherit;
 }
 .stat p {
-  font-size: 10px;
+  font-size: 14px;
+  line-height: 1.5;
   margin: 0 0 14px;
   color: inherit;
-  opacity: 0.72;
+  opacity: 1;
 }
 .mint {
   background: #e9f3eb;
@@ -461,6 +462,24 @@ select {
   height: 100%;
   background: #59a77a;
   border-radius: 6px;
+}
+.stat .micro {
+  font-size: 13px;
+  line-height: 1.5;
+  opacity: 1;
+}
+.stat .chip {
+  font-size: 13px;
+  line-height: 1.5;
+  white-space: normal;
+}
+.stat.yellow p,
+.stat.yellow .chip {
+  color: #6e5827;
+}
+.stat.peach p,
+.stat.peach .chip {
+  color: #805944;
 }
 .micro {
   font-size: 9px;
@@ -1068,6 +1087,10 @@ dialog .section-title {
   color: #dcb795;
   border-color: #5c4939;
 }
+[data-theme="dark"] .stat p,
+[data-theme="dark"] .stat .chip {
+  color: inherit;
+}
 [data-theme="dark"] .stat h2 {
   color: inherit;
 }
@@ -1119,9 +1142,6 @@ dialog .section-title {
   }
   .stat {
     padding: 25px;
-  }
-  .stat p {
-    font-size: 12px;
   }
 }
 @media (max-width: 1150px) {
@@ -1277,13 +1297,6 @@ dialog .section-title {
   .stat > div:first-child svg {
     width: 16px;
   }
-  .stat p {
-    font-size: 9px;
-    line-height: 1.7;
-  }
-  .stat .chip {
-    font-size: 8px;
-  }
   .form-grid {
     grid-template-columns: 1fr;
   }
@@ -1402,14 +1415,14 @@ dialog .section-title {
     grid-column: 1;
     min-height: 0;
     margin: 6px 0 7px;
-    font-size: 10px;
+    font-size: 14px;
   }
   .stat:first-child .progress {
     grid-column: 1/-1;
   }
   .stat:first-child .micro {
     grid-column: 1/-1;
-    font-size: 8px;
+    font-size: 13px;
     margin-top: 5px;
   }
   .stat {
